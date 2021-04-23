@@ -1,0 +1,8 @@
+{
+    "name":"foodWeb",
+    "mode":"debug",
+    "Host":"localhost",
+    "port":"8080",
+    "MySQLLink":"root:1234@/test?charset=utf8&parseTime=True&loc=Local"
+
+}

@@ -11,12 +11,13 @@ import (
 
 type User struct {
 	gorm.Model
-	Name      string
+	Name      string `json:"name" form:"name"`
 	Username  string `gorm:"type:varchar(20);unique;not null"json:"username" form:"username"`
 	Password  string `gorm:"type:varchar(20);unique;not null"json:"password" form:"password"`
-	Sex       string `gorm:"type:BOOLEAN; DEFAULT:true"`
-	Age       string `gorm:"type:smallint; DEFAULT:18"`
-	Signature string `gorm:"type:TEXT"`
+	Sex       string `gorm:"type:BOOLEAN; DEFAULT:true"json:"sex" form:"sex"`
+	Age       string `gorm:"type:smallint; DEFAULT:18"json:"age" form:"age"`
+	Signature string `gorm:"type:TEXT"json:"signature" form:"signature"`
+	Id        string `json:"id" form:"id"`
 }
 
 var SDB *gorm.DB

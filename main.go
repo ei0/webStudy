@@ -106,5 +106,7 @@ func main() {
 
 	fw.POST("/register", handle.RegisterPost)
 
+	fw.POST("/alterinfo", handle.AlterInfoPost)
+
 	fw.Run(tool.FoodWebCfg.Host + ":" + tool.FoodWebCfg.Port)
 }

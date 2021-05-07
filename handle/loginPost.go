@@ -28,6 +28,7 @@ func LoginPost(c *gin.Context) {
 			"sex":       user.Sex,
 			"name":      user.Name,
 			"signature": user.Signature,
+			"id":        user.ID,
 		})
 	} else {
 		c.JSON(200, gin.H{

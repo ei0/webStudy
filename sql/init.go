@@ -20,6 +20,7 @@ type User struct {
 	Id        string `json:"id" form:"id"`
 }
 
+// type Counter
 var SDB *gorm.DB
 
 func init() {

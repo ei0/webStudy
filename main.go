@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 
 	"handle"
 	"middleware"
@@ -88,6 +89,7 @@ func main() {
 	fmt.Println("aaa")
 	fw := gin.Default()
 	fw.Use(middleware.Cors())
+	fw.StaticFS("/static", http.Dir("./static"))
 	// fw.GET("/a1", func(context *gin.Context) {
 	// 	//context.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 	// 	fmt.Println("请求路径：", context.FullPath())
@@ -107,6 +109,6 @@ func main() {
 	fw.POST("/register", handle.RegisterPost)
 
 	fw.POST("/alterinfo", handle.AlterInfoPost)
-
+	fw.POST("/image", handle.ImagePost)
 	fw.Run(tool.FoodWebCfg.Host + ":" + tool.FoodWebCfg.Port)
 }

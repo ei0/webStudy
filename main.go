@@ -89,6 +89,7 @@ func main() {
 	fmt.Println("aaa")
 	fw := gin.Default()
 	fw.Use(middleware.Cors())
+	//fw.MaxMultipartMemory = 8 << 20
 	fw.StaticFS("/static", http.Dir("./static"))
 	// fw.GET("/a1", func(context *gin.Context) {
 	// 	//context.Writer.Header().Set("Access-Control-Allow-Origin", "*")
@@ -109,6 +110,7 @@ func main() {
 	fw.POST("/register", handle.RegisterPost)
 
 	fw.POST("/alterinfo", handle.AlterInfoPost)
-	fw.POST("/image", handle.ImagePost)
+	fw.POST("/message", handle.MessagePost)
+	fw.GET("/initmesg", handle.InitMesgGet)
 	fw.Run(tool.FoodWebCfg.Host + ":" + tool.FoodWebCfg.Port)
 }

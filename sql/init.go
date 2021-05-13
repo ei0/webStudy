@@ -19,6 +19,16 @@ type User struct {
 	Signature string `gorm:"type:TEXT"json:"signature" form:"signature"`
 	Id        string `json:"id" form:"id"`
 }
+type Message struct {
+	gorm.Model
+	Uid  string `json:"uid" form:"uid" gorm:"type:int;not null"`
+	Text string `json:"text" form:"text" gorm:"type:varchar(200)"`
+}
+type ImageURL struct {
+	gorm.Model
+	Mid string `json:"mid" form:"mid" gorm:"type:int;not null"`
+	Url string `json:"url" form:"url" gorm:"type:varchar(255)"`
+}
 
 // type Counter
 var SDB *gorm.DB
@@ -32,6 +42,8 @@ func init() {
 	}
 	fmt.Println("数据库连接成功")
 	SDB.Debug().AutoMigrate(&User{})
+	SDB.Debug().AutoMigrate(&Message{})
+	SDB.Debug().AutoMigrate(&ImageURL{})
 	// var a = User{Name: "ni", Username: "zzk123", Password: "123"}
 	// SDB.Debug().Create(&a)
 }

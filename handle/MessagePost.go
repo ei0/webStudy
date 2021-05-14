@@ -3,7 +3,6 @@ package handle
 import (
 	"fmt"
 	"sql"
-	"strings"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -37,13 +36,12 @@ func MessagePost(c *gin.Context) {
 
 	} else {
 		fmt.Println("这条是个带文件的post")
-		index := strings.Index(file.Filename, ".")
-		fileType := file.Filename[index:]
-		dst := fmt.Sprintf("D:/Golang_test/src/01-init/static/%d%s", time.Now().UnixNano(), fileType)
+		imageURL := fmt.Sprintf("%d%s", time.Now().UnixNano(), file.Filename)
+		dst := fmt.Sprintf("D:/Golang_test/src/01-init/static/%s", imageURL)
 		c.SaveUploadedFile(file, dst)
 		var imgurl = sql.ImageURL{
 			Mid: id,
-			Url: dst,
+			Url: imageURL,
 		}
 		result := sql.SDB.Debug().Create(&imgurl)
 		if result.Error != nil {

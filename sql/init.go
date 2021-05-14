@@ -21,8 +21,10 @@ type User struct {
 }
 type Message struct {
 	gorm.Model
-	Uid  string `json:"uid" form:"uid" gorm:"type:int;not null"`
-	Text string `json:"text" form:"text" gorm:"type:varchar(200)"`
+	Uid     string `json:"uid" form:"uid" gorm:"type:int;not null"`
+	Text    string `json:"text" form:"text" gorm:"type:varchar(200)"`
+	Like    int    `gorm:"type:int;DEFAULT:0"`
+	Collect int    `gorm:"type:int;DEFAULT:0"`
 }
 type ImageURL struct {
 	gorm.Model

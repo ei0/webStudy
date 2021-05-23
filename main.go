@@ -112,5 +112,6 @@ func main() {
 	fw.POST("/alterinfo", handle.AlterInfoPost)
 	fw.POST("/message", handle.MessagePost)
 	fw.GET("/initmesg", handle.InitMesgGet)
+	fw.GET("/initcharts", handle.InitChartsGet)
 	fw.Run(tool.FoodWebCfg.Host + ":" + tool.FoodWebCfg.Port)
 }

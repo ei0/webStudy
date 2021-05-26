@@ -1,7 +1,6 @@
 package handle
 
 import (
-	"fmt"
 	"sql"
 
 	"github.com/gin-gonic/gin"
@@ -21,7 +20,7 @@ func InitChartsGet(c *gin.Context) {
 	var collectT []sql.Message
 	var likeT []sql.Message
 	//sql.SDB.Table("messages").Order("`like`").Limit(10).Find(&likeT)
-	sql.SDB.Debug().Raw("SELECT * FROM test.messages order by `like` desc").Limit(10).Scan(&likeT)
+	sql.SDB.Raw("SELECT * FROM test.messages order by `like` desc").Limit(10).Scan(&likeT)
 	for k, v := range likeT {
 		likes[k] = v.Like
 		//fmt.Println(SubstrByByte(v.Text, 50))
@@ -37,10 +36,10 @@ func InitChartsGet(c *gin.Context) {
 		nicknamesLike[k] = user.Name
 
 	}
-	fmt.Println("点赞数组", likes)
-	fmt.Println("用户名数组", nicknamesLike)
-	fmt.Println("消息数组", messagesLike)
-	sql.SDB.Debug().Raw("SELECT * FROM test.messages order by `collect` desc").Limit(10).Scan(&collectT)
+	// fmt.Println("点赞数组", likes)
+	// fmt.Println("用户名数组", nicknamesLike)
+	// fmt.Println("消息数组", messagesLike)
+	sql.SDB.Raw("SELECT * FROM test.messages order by `collect` desc").Limit(10).Scan(&collectT)
 	for k, v := range collectT {
 		collects[k] = v.Collect
 		//fmt.Println(SubstrByByte(v.Text, 50))
@@ -56,9 +55,9 @@ func InitChartsGet(c *gin.Context) {
 		nicknamesCollect[k] = user.Name
 
 	}
-	fmt.Println("收藏数组", collects)
-	fmt.Println("用户名数组", nicknamesCollect)
-	fmt.Println("消息数组", messagesCollect)
+	// fmt.Println("收藏数组", collects)
+	// fmt.Println("用户名数组", nicknamesCollect)
+	// fmt.Println("消息数组", messagesCollect)
 	// c.JSON(200, gin.H{
 	// 	"status": true,
 	// })

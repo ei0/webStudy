@@ -1,7 +1,9 @@
 package handle
 
 import (
+	"fmt"
 	"sql"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -13,11 +15,23 @@ func InitMesgGetA(c *gin.Context) {
 }
 
 func InitMesgGet(c *gin.Context) {
+	var page = c.Query("id")
+	fmt.Println("id==", page)
 	var messages []sql.Message
 	var count int
+	var curCount int
 	const LIMIT int = 10
+	val, err := strconv.Atoi(page)
+	if err != nil {
+		fmt.Println(err)
+	}
+	var start = (val - 1) * LIMIT
+	fmt.Println("从第几条开始查找数据库", start)
 	//拿到数据库中所有的动态消息,message内容，创建时间，用户id
-	sql.SDB.Table("messages").Limit(LIMIT).Find(&messages).Limit(-1).Count(&count)
+	sql.SDB.Debug().Table("messages").Offset(start).Limit(LIMIT).Find(&messages).Limit(-1).Count(&count)
+
+	fmt.Println("message信息", messages)
+	curCount = len(messages)
 	var uids [LIMIT]string
 	var nicknames [LIMIT]string
 	var creatTimes [LIMIT]string
@@ -62,6 +76,7 @@ func InitMesgGet(c *gin.Context) {
 		"imageURLs":     imageURLs,
 		"likeCounts":    likeCounts,
 		"collectCounts": collectCounts,
+		"curCount":      curCount,
 	})
 	//返回动态总数目
 

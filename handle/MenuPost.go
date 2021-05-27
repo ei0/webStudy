@@ -8,29 +8,29 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func MessagePost(c *gin.Context) {
+func MenuPost(c *gin.Context) {
 	fmt.Println("我进来了")
 	//form, err := c.MultipartForm()
 	id := c.PostForm("id")
 	file, err := c.FormFile("file")
 	if err != nil {
 		fmt.Println("没有文件！这条可能是文本信息")
-		var mesg = sql.Message{
-			Uid:  id,
-			Text: c.PostForm("textarea"),
+		var menu = sql.Menu{
+			Uid:      id,
+			Describe: c.PostForm("textarea"),
 		}
-		result := sql.SDB.Debug().Create(&mesg)
+		result := sql.SDB.Debug().Create(&menu)
 		if result.Error != nil {
 			c.JSON(200, gin.H{
 				"status": false,
 			})
 		} else {
-			sql.SDB.Debug().Last(&mesg)
+			sql.SDB.Debug().Last(&menu)
 			//fmt.Println(mesg.ID)
 			//fmt.Println(mesg.Uid)
 			c.JSON(200, gin.H{
 				"status": true,
-				"mid":    mesg.ID,
+				"mid":    menu.ID,
 			})
 		}
 
@@ -40,7 +40,7 @@ func MessagePost(c *gin.Context) {
 		dst := fmt.Sprintf("D:/Golang_test/src/01-init/static/%s", imageURL)
 		c.SaveUploadedFile(file, dst)
 		var imgurl = sql.ImageURL{
-			Mid: id,
+			Did: id,
 			Url: imageURL,
 		}
 		result := sql.SDB.Debug().Create(&imgurl)

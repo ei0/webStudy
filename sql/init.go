@@ -28,8 +28,37 @@ type Message struct {
 }
 type ImageURL struct {
 	gorm.Model
-	Mid string `json:"mid" form:"mid" gorm:"type:int;not null"`
+	Mid string `json:"mid" form:"mid" gorm:"type:int;not null;DEFAULT:0"`
+	Sid string `json:"sid" form:"sid" gorm:"type:int;not null;DEFAULT:0"`
+	Did string `json:"did" form:"did" gorm:"type:int;not null;DEFAULT:0"`
 	Url string `json:"url" form:"url" gorm:"type:varchar(255)"`
+}
+type Menu struct {
+	gorm.Model
+	Uid      string `json:"uid" form:"uid" gorm:"type:int;not null"`
+	Describe string `gorm:"type:TEXT"json:"describe" form:"describe"`
+	Score    int    `json:"score" form:"score" gorm:"type:int;not null;DEFAULT:0"`
+}
+type Shop struct {
+	gorm.Model
+	Uid      string `json:"uid" form:"uid" gorm:"type:int;not null"`
+	Describe string `gorm:"type:TEXT"json:"describe" form:"describe"`
+	Score    int    `json:"score" form:"score" gorm:"type:int;not null;DEFAULT:0"`
+}
+type Like struct {
+	gorm.Model
+	Mid string `json:"mid" form:"mid" gorm:"type:int;not null;DEFAULT:0"`
+	Sid string `json:"sid" form:"sid" gorm:"type:int;not null;DEFAULT:0"`
+	Did string `json:"did" form:"did" gorm:"type:int;not null;DEFAULT:0"`
+	Uid string `json:"uid" form:"uid" gorm:"type:int;not null;DEFAULT:0"`
+}
+
+type Collect struct {
+	gorm.Model
+	Mid string `json:"mid" form:"mid" gorm:"type:int;not null;DEFAULT:0"`
+	Sid string `json:"sid" form:"sid" gorm:"type:int;not null;DEFAULT:0"`
+	Did string `json:"did" form:"did" gorm:"type:int;not null;DEFAULT:0"`
+	Uid string `json:"uid" form:"uid" gorm:"type:int;not null;DEFAULT:0"`
 }
 
 // type Counter
@@ -46,6 +75,10 @@ func init() {
 	SDB.Debug().AutoMigrate(&User{})
 	SDB.Debug().AutoMigrate(&Message{})
 	SDB.Debug().AutoMigrate(&ImageURL{})
+	SDB.Debug().AutoMigrate(&Menu{})
+	SDB.Debug().AutoMigrate(&Collect{})
+	SDB.Debug().AutoMigrate(&Like{})
+	SDB.Debug().AutoMigrate(&Shop{})
 	// var a = User{Name: "ni", Username: "zzk123", Password: "123"}
 	// SDB.Debug().Create(&a)
 }

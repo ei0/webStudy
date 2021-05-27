@@ -113,5 +113,7 @@ func main() {
 	fw.POST("/message", handle.MessagePost)
 	fw.GET("/initmesg", handle.InitMesgGet)
 	fw.GET("/initcharts", handle.InitChartsGet)
+	fw.POST("/menu", handle.MenuPost)
+	fw.GET("/initmenu", handle.InitMenuGet)
 	fw.Run(tool.FoodWebCfg.Host + ":" + tool.FoodWebCfg.Port)
 }

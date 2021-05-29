@@ -17,6 +17,7 @@ func InitMesgGetA(c *gin.Context) {
 func InitMesgGet(c *gin.Context) {
 	var page = c.Query("id")
 	fmt.Println("id==", page)
+	var uid = c.Query("uid")
 	var messages []sql.Message
 	var count int
 	var curCount int
@@ -40,8 +41,21 @@ func InitMesgGet(c *gin.Context) {
 	var imageURLs [LIMIT][]string
 	var likeCounts [LIMIT]int
 	var collectCounts [LIMIT]int
-
+	var mids [LIMIT]uint
+	var flageLikes [LIMIT]int
 	for k, v := range messages {
+		// if v.Uid == uid {
+		// 	flageLikes[k] =
+		// }
+		var like sql.Like
+		result := sql.SDB.Debug().Where("mid=? AND uid=?", v.ID, uid).First(&like)
+		if result.RowsAffected == 1 {
+			flageLikes[k] = 0
+		} else {
+			flageLikes[k] = 1
+		}
+
+		mids[k] = v.ID
 		uids[k] = v.Uid                                           //绑定uid
 		creatTimes[k] = v.CreatedAt.Format("2006-01-02 15:04:05") //绑定创建时间
 
@@ -77,6 +91,8 @@ func InitMesgGet(c *gin.Context) {
 		"likeCounts":    likeCounts,
 		"collectCounts": collectCounts,
 		"curCount":      curCount,
+		"mids":          mids,
+		"flageLike":     flageLikes,
 	})
 	//返回动态总数目
 

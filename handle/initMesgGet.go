@@ -43,6 +43,7 @@ func InitMesgGet(c *gin.Context) {
 	var collectCounts [LIMIT]int
 	var mids [LIMIT]uint
 	var flageLikes [LIMIT]int
+	var flageCollects [LIMIT]int
 	for k, v := range messages {
 		// if v.Uid == uid {
 		// 	flageLikes[k] =
@@ -53,6 +54,13 @@ func InitMesgGet(c *gin.Context) {
 			flageLikes[k] = 0
 		} else {
 			flageLikes[k] = 1
+		}
+		var collect sql.Collect
+		result = sql.SDB.Where("mid=? AND uid=?", v.ID, uid).First(&collect)
+		if result.RowsAffected == 1 {
+			flageCollects[k] = 0
+		} else {
+			flageCollects[k] = 1
 		}
 
 		mids[k] = v.ID
@@ -93,6 +101,7 @@ func InitMesgGet(c *gin.Context) {
 		"curCount":      curCount,
 		"mids":          mids,
 		"flageLike":     flageLikes,
+		"flageCollect":  flageCollects,
 	})
 	//返回动态总数目
 

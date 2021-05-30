@@ -38,6 +38,7 @@ type Menu struct {
 	Uid      string `json:"uid" form:"uid" gorm:"type:int;not null"`
 	Describe string `gorm:"type:TEXT"json:"describe" form:"describe"`
 	Score    int    `json:"score" form:"score" gorm:"type:int;not null;DEFAULT:0"`
+	Kind     string `json:"kind" form:"kind" gorm:"type:varchar(20);not null;DEFAULT:0"`
 }
 type Shop struct {
 	gorm.Model

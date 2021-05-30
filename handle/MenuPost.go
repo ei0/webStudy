@@ -13,11 +13,13 @@ func MenuPost(c *gin.Context) {
 	//form, err := c.MultipartForm()
 	id := c.PostForm("id")
 	file, err := c.FormFile("file")
+	kind := c.PostForm("kind")
 	if err != nil {
 		fmt.Println("没有文件！这条可能是文本信息")
 		var menu = sql.Menu{
 			Uid:      id,
 			Describe: c.PostForm("textarea"),
+			Kind:     kind,
 		}
 		result := sql.SDB.Debug().Create(&menu)
 		if result.Error != nil {

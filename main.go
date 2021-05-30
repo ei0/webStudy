@@ -108,7 +108,6 @@ func main() {
 	//fw.POST("/login", loginPost)
 
 	fw.POST("/register", handle.RegisterPost)
-
 	fw.POST("/alterinfo", handle.AlterInfoPost)
 	fw.POST("/message", handle.MessagePost)
 	fw.GET("/initmesg", handle.InitMesgGet)
@@ -116,5 +115,7 @@ func main() {
 	fw.POST("/menu", handle.MenuPost)
 	fw.GET("/initmenu", handle.InitMenuGet)
 	fw.GET("/like", handle.LikeButtonGet)
+	fw.GET("/collect", handle.CollectButtonGet)
+
 	fw.Run(tool.FoodWebCfg.Host + ":" + tool.FoodWebCfg.Port)
 }

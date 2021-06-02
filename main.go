@@ -118,6 +118,8 @@ func main() {
 	fw.GET("/collect", handle.CollectButtonGet)
 	fw.GET("/mymenus", handle.MyMenusGet)
 	fw.GET("/deletemenu", handle.DeleteMyMenuGet)
+	fw.GET("/mymesgs", handle.MyMesgsGet)
+	fw.GET("/deletemesg", handle.DeleteMyMesgGet)
 
 	fw.Run(tool.FoodWebCfg.Host + ":" + tool.FoodWebCfg.Port)
 }

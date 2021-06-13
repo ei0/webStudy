@@ -122,5 +122,8 @@ func main() {
 	fw.GET("/deletemesg", handle.DeleteMyMesgGet)
 	fw.GET("/details", handle.DetailsGet)
 	fw.GET("/routers", handle.RoutersGet)
+	fw.GET("/mymesgsA", handle.MyMesgsAGet)
+	fw.GET("/mylike", handle.MyLikeGet)
+	fw.GET("/mycollect", handle.MyCollectGet)
 	fw.Run(tool.FoodWebCfg.Host + ":" + tool.FoodWebCfg.Port)
 }

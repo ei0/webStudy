@@ -1,0 +1,2 @@
+{"client_ip":"127.0.0.1","latency_time":34910500,"level":"info","msg":"","req_method":"GET","req_uri":"/initmenu?id=1\u0026kind=1","status_code":200,"time":"2021-06-14 15:57:16"}
+{"client_ip":"127.0.0.1","latency_time":2958300,"level":"info","msg":"","req_method":"GET","req_uri":"/details?id=3","status_code":200,"time":"2021-06-14 15:57:29"}

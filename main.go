@@ -9,6 +9,7 @@ import (
 	"sql"
 	"tool"
 
+	// "github.com/gin-contrib/zap"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 )
@@ -88,6 +89,13 @@ func main() {
 
 	fmt.Println("aaa")
 	fw := gin.Default()
+	//logger, _ := zap.NewProduction()
+	//fw.Use(ginzap.Ginzap(logger, time.RFC3339, true))
+
+	// Logs all panic to error log
+	//   - stack means whether output the stack info.
+	//	fw.Use(ginzap.RecoveryWithZap(logger, true))
+	fw.Use(middleware.LogerMiddleware())
 	fw.Use(middleware.Cors())
 	//fw.MaxMultipartMemory = 8 << 20
 	fw.StaticFS("/static", http.Dir("./static"))

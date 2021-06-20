@@ -13,7 +13,13 @@ func AlterInfoPost(c *gin.Context) {
 	c.ShouldBind(&user)
 	fmt.Println(user)
 	tool.PrintStruct(user)
-	result := sql.SDB.Debug().Model(&user).Where("id = ?", user.Id).Updates(sql.User{Name: user.Name, Age: user.Age, Sex: user.Sex, Signature: user.Signature})
+	sexA := "1"
+	if user.Sex == "true" {
+		sexA = "1"
+	} else {
+		sexA = "2"
+	}
+	result := sql.SDB.Debug().Model(&user).Where("id = ?", user.Id).Updates(sql.User{Name: user.Name, Age: user.Age, Sex: sexA, Signature: user.Signature})
 
 	if result.Error != nil {
 		fmt.Println("更新个人信息出错")

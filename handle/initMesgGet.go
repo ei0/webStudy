@@ -49,7 +49,7 @@ func InitMesgGet(c *gin.Context) {
 		// 	flageLikes[k] =
 		// }
 		var like sql.Like
-		result := sql.SDB.Debug().Where("mid=? AND uid=?", v.ID, uid).First(&like)
+		result := sql.SDB.Where("mid=? AND uid=?", v.ID, uid).First(&like)
 		if result.RowsAffected == 1 {
 			flageLikes[k] = 0
 		} else {
@@ -74,7 +74,11 @@ func InitMesgGet(c *gin.Context) {
 
 		var user sql.User
 		sql.SDB.Where("id=?", v.Uid).First(&user)
-		nicknames[k] = user.Name //绑定nickname
+		if user.Name == "" {
+			nicknames[k] = "zhao"
+		} else {
+			nicknames[k] = user.Name //绑定nickname
+		}
 
 		var images []sql.ImageURL
 		sql.SDB.Where("mid=?", v.ID).Find(&images).Count(&imageCounts[k])

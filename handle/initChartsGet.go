@@ -33,7 +33,13 @@ func InitChartsGet(c *gin.Context) {
 		}
 		var user sql.User
 		sql.SDB.Where("id=?", v.Uid).First(&user)
-		nicknamesLike[k] = user.Name
+		if user.Name == "" {
+			// fmt.Println("点赞排行赋值zhao")
+			nicknamesLike[k] = "zhao"
+		} else {
+			nicknamesLike[k] = user.Name //绑定nickname
+		}
+		// nicknamesLike[k] = user.Name
 
 	}
 	// fmt.Println("点赞数组", likes)
@@ -52,7 +58,12 @@ func InitChartsGet(c *gin.Context) {
 		}
 		var user sql.User
 		sql.SDB.Where("id=?", v.Uid).First(&user)
-		nicknamesCollect[k] = user.Name
+		if user.Name == "" {
+			nicknamesCollect[k] = "zhao"
+		} else {
+			nicknamesCollect[k] = user.Name //绑定nickname
+		}
+		// nicknamesCollect[k] = user.Name
 
 	}
 	// fmt.Println("收藏数组", collects)

@@ -133,5 +133,7 @@ func main() {
 	fw.GET("/mymesgsA", handle.MyMesgsAGet)
 	fw.GET("/mylike", handle.MyLikeGet)
 	fw.GET("/mycollect", handle.MyCollectGet)
+	fw.GET("/homeinit", handle.HomeInitGet)
+	fw.GET("/info", handle.InfoGet)
 	fw.Run(tool.FoodWebCfg.Host + ":" + tool.FoodWebCfg.Port)
 }
